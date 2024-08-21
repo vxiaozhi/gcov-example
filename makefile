@@ -44,6 +44,12 @@ gcovr-report: coverage ## Generate gcovr report
 	mkdir gcovr-report
 	gcovr --root . --html --html-details --output gcovr-report/coverage.html
 
+llvm-gcov:
+	llvm-gcov.sh main.gcda foo.gcda --branch-counts --branch-probabilities --all-blocks --demangled-names --hash-filenames --object-directory .
+
+llvm-gcov-intermediate-format:
+	llvm-gcov.sh main.gcda foo.gcda -i --branch-counts --branch-probabilities --all-blocks --demangled-names --hash-filenames --object-directory .
+
 deps: ## Install dependencies
 	sudo apt-get install lcov clang-format
 	pip install gcovr
