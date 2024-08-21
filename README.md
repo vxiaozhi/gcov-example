@@ -55,7 +55,7 @@ llvm-gcov.sh main.gcda foo.gcda --branch-counts --branch-probabilities --all-blo
 ```
 
 ```
-          -:    0:Source:main.c
+        -:    0:Source:main.c
         -:    0:Graph:./main.gcno
         -:    0:Data:./main.gcda
         -:    0:Runs:1
@@ -102,7 +102,8 @@ lcount:15,1
 
 这两种格式的区别在于： 
 
-完全格式由于展示了代码信息，因此解析过程中要求 gcno gcda 依赖的源代码文件路径必需存在， 否则会无法解析失败报错。
+- 完全格式由于展示了代码信息，因此解析过程中要求 gcno gcda 依赖的源代码文件路径必需存在， 否则会无法解析失败报错，而中间格式则无此限制。
+- llvm-gcov.sh 可通过 -s 参数设置一个前缀路径 ， 但只支持设置一个路径。
 
 ## gcov -> report 生成
 
@@ -112,9 +113,14 @@ lcount:15,1
 - lcov 支持生成应用层和内核层的代码覆盖率， gcovr 只支持应用层代码
 - lcov 可以解析完全格式gcda 和 中间格式gcda 生成报告， 而gcovr 只能解析完全格式gcda。
 
-如何选择？
+那么如何选择使用 lcov or gcovr 生成报告呢？
 
-如果项目简单（编译和运行都在一台机器上、没有交叉编译、应用层程序），可以选择 gcovr，  
+如果项目具备以下特点，那么只能优先选择lcov，否则两者皆可。
+
+- 内核 or 驱动代码。
+- 交叉编译
+- 编译环境和运行环境在不同操作系统的开发机器上。
+  
 
 
 ## Getting started
