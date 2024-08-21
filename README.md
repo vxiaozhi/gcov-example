@@ -100,9 +100,21 @@ lcount:14,1
 lcount:15,1
 ```
 
+这两种格式的区别在于： 
 
+完全格式由于展示了代码信息，因此解析过程中要求 gcno gcda 依赖的源代码文件路径必需存在， 否则会无法解析失败报错。
 
 ## gcov -> report 生成
+
+从 gcov 生成可视化 的html 报告，可选择的工具 lcov gcovr，两者的区别包括：
+
+- lcov (Perl 实现)， gcovr （Python 实现）
+- lcov 支持生成应用层和内核层的代码覆盖率， gcovr 只支持应用层代码
+- lcov 可以解析完全格式gcda 和 中间格式gcda 生成报告， 而gcovr 只能解析完全格式gcda。
+
+如何选择？
+
+如果项目简单（编译和运行都在一台机器上、没有交叉编译、应用层程序），可以选择 gcovr，  
 
 
 ## Getting started
