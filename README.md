@@ -44,11 +44,17 @@ Here's how each of these steps is done exactly.
 
 ## 详解 gcov
 
-使用 llvm gcov/gcov 命令，可以将 gcno gcda 文件生成 gcda， gcda是文本文件。主要包括两种格式：
+使用 llvm gcov/gcov 命令，可以将 gcno gcda 文件生成 gcda， gcda是文本文件。主要包括两种格式, 以maic.c 为例：
 
-- 完全解析的 gcda 文件：
+**1. 完全解析的 gcda 文件：**
 
-  ```
+可通过如下命令生成：
+
+```
+llvm-gcov.sh main.gcda foo.gcda --branch-counts --branch-probabilities --all-blocks --demangled-names --hash-filenames --object-directory .
+```
+
+```
           -:    0:Source:main.c
         -:    0:Graph:./main.gcno
         -:    0:Data:./main.gcda
@@ -72,11 +78,17 @@ function main called 1 returned 100% blocks executed 100%
         1:   15:  return 0;
         1:   15-block  0
         -:   16:}
-  ```
+```
 
-- 中间格式的 gcda 文件：
+**2. 中间格式的 gcda 文件：**
 
-  ```
+可通过如下命令生成(增加了 -i 参数)：
+
+```
+	llvm-gcov.sh main.gcda foo.gcda -i --branch-counts --branch-probabilities --all-blocks --demangled-names --hash-filenames --object-directory .
+```
+
+```
   file:main.c
 function:8,1,main
 lcount:8,1
@@ -86,7 +98,7 @@ lcount:12,1
 lcount:13,1
 lcount:14,1
 lcount:15,1
-  ```
+```
 
 
 
