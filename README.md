@@ -42,6 +42,57 @@ There are three main steps:
 
 Here's how each of these steps is done exactly.
 
+## 详解 gcov
+
+使用 llvm gcov/gcov 命令，可以将 gcno gcda 文件生成 gcda， gcda是文本文件。主要包括两种格式：
+
+- 完全解析的 gcda 文件：
+
+  ```
+          -:    0:Source:main.c
+        -:    0:Graph:./main.gcno
+        -:    0:Data:./main.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:
+        -:    3:#include "foo.h"
+        -:    4:#include "source_subdir/bar.h"
+        -:    5:
+        -:    6:int g_a = 555;
+        -:    7:
+function main called 1 returned 100% blocks executed 100%
+        1:    8:int main(void) {
+        -:    9:
+        1:   10:  printf("print global: %d \n", g_a);
+        1:   11:  printf("Start calling foo() ...\n");
+        1:   12:  foo(1);
+        1:   13:  foo(2);
+        1:   14:  bar(3);
+        1:   15:  return 0;
+        1:   15-block  0
+        -:   16:}
+  ```
+
+- 中间格式的 gcda 文件：
+
+  ```
+  file:main.c
+function:8,1,main
+lcount:8,1
+lcount:10,1
+lcount:11,1
+lcount:12,1
+lcount:13,1
+lcount:14,1
+lcount:15,1
+  ```
+
+
+
+## gcov -> report 生成
+
+
 ## Getting started
 
 You can clone this repository and run `make help` to see how to use it.
