@@ -121,7 +121,7 @@ Multiple bug fixes
 
 从 gcov 生成可视化 的html 报告，可选择的工具 lcov gcovr，两者的区别包括：
 
-- lcov (Perl 实现)， gcovr （Python 实现）
+- lcov (Perl 实现)[github](https://github.com/linux-test-project/lcov)， gcovr （Python 实现）
 - lcov 支持生成应用层和内核层的代码覆盖率， gcovr 只支持应用层代码
 - lcov 可以解析完全格式gcda 和 中间格式gcda 生成报告， 而gcovr 只能解析完全格式gcda。
 
