@@ -105,6 +105,18 @@ lcount:15,1
 - 完全格式由于展示了代码信息，因此解析过程中要求 gcno gcda 依赖的源代码文件路径必需存在， 否则会无法解析失败报错，而中间格式则无此限制。
 - llvm-gcov.sh 可通过 -s 参数设置一个前缀路径 ， 但只支持设置一个路径。
 
+对于 中间格式的gcda文件， 需要 lcov 版本 >= 1.15 才能解析：
+
+```
+1.15
+Changes in version 1.15 include:
+
+Support for GCOV's intermediate text and JSON format
+Option to exclude exception branches
+Options to configure symbol demangling
+Multiple bug fixes
+```
+
 ## gcov -> report 生成
 
 从 gcov 生成可视化 的html 报告，可选择的工具 lcov gcovr，两者的区别包括：
